@@ -2,8 +2,8 @@
 	<div class="contentTitle">Check</div>
 	<div class="vmargin" style="height:10px;"></div>
 	<form method="post" action="borAction" class="formSingle">
-		<input type="text" name="ISBN" placeholder="ISBN" style="width:calc(50% - 15px)">
-		<input type="text" name="MemID" placeholder="Member ID" style="width:calc(50% - 15px)">
+		<input type="text" name="Book" placeholder="Search Book..." style="width:calc(50% - 15px)">
+		<input type="text" name="Member" placeholder="Search Member..." style="width:calc(50% - 15px)">
 		<div class="vmargin" style="height:10px;"></div>
 		<table cellspacing=0>
 			<thead>
