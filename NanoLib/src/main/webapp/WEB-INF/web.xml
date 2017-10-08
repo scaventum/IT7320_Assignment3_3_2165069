@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>dbAccess.SignInAction</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>BorAction</servlet-name>
+  	<display-name>BorAction</display-name>
+  	<description></description>
+  	<servlet-class>dbAccess.BorAction</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>SignInAction</servlet-name>
   	<url-pattern>/SignInAction</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BorAction</servlet-name>
+  	<url-pattern>/BorAction</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -14,7 +14,7 @@
 		<input type="text" name="MemFName" placeholder="Member First Name" disabled style="width:calc(50% - 15px)">
 		<input type="text" name="MemLName" placeholder="Member Last Name" disabled style="width:calc(50% - 15px)">
 		<div class="vmargin" style="height:10px;"></div>
-		<textarea name="MemNoticePlaceholder" placeholder="Member Notice" disabled></textarea>
+		<textarea name="RetNoticePlaceholder" placeholder="Return Notice" disabled></textarea>
 		<div class="vmargin" style="height:10px;"></div>
 		<input type="submit" name="BtnReturn" value="Return" disabled>
 	</form>

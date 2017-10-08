@@ -1,7 +1,23 @@
+<script>
+$(document).ready(function() {
+	$("input[name='ISBN']").change(function(e){
+		alert("a");
+		var ISBN = $(this).val();
+		$.get('BorAction', {
+			Action : "getSerial",
+			ISBN : ISBN
+		}, function(result) {
+			$("input[name='SerialPlaceholder']").val(result);
+			$("input[name='Serial']").val(result);
+		});
+	});
+});
+</script>
+
 <div class="content">
 	<div class="contentTitle">Borrow</div>
 	<div class="vmargin" style="height:10px;"></div>
-	<form method="post" action="borAction" class="formSingle">
+	<form method="post" action="BorAction" class="formSingle">
 		<input type="text" name="ISBN" placeholder="ISBN" required style="width:calc(100% - 64px)">
 		<input type="text" name="SerialPlaceholder" placeholder="#" disabled style="width:34px">
 		<input type="hidden" name="Serial" required>

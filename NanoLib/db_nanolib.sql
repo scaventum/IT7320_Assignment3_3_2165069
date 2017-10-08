@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2017 at 02:21 PM
+-- Generation Time: Oct 08, 2017 at 10:50 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_nanolib`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_activity`
+--
+
+CREATE TABLE `log_activity` (
+  `LogID` bigint(20) NOT NULL,
+  `TransID` varchar(50) NOT NULL,
+  `LogModule` varchar(50) NOT NULL,
+  `LogAction` varchar(50) NOT NULL,
+  `LogTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log_activity`
+--
+
+INSERT INTO `log_activity` (`LogID`, `TransID`, `LogModule`, `LogAction`, `LogTime`) VALUES
+(1, 'ADM', 'User', 'Insert', '2017-10-08 00:00:00'),
+(2, 'M00001', 'Member', 'Insert', '2017-10-08 00:00:00'),
+(3, 'M00002', 'Member', 'Insert', '2017-10-08 00:00:00'),
+(4, '0-472-06521-1', 'Book', 'Insert', '2017-10-08 00:00:00'),
+(5, '978-0-478-39455-9', 'Book', 'Insert', '2017-10-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -129,12 +154,19 @@ CREATE TABLE `tr_borrowing` (
   `ISBN` varchar(50) NOT NULL,
   `Serial` int(11) NOT NULL,
   `Duration` int(11) NOT NULL,
+  `BorDate` date NOT NULL,
   `BorReturnDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `log_activity`
+--
+ALTER TABLE `log_activity`
+  ADD PRIMARY KEY (`LogID`);
 
 --
 -- Indexes for table `ms_book`
@@ -165,6 +197,16 @@ ALTER TABLE `ms_user`
 --
 ALTER TABLE `tr_borrowing`
   ADD PRIMARY KEY (`BorID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `log_activity`
+--
+ALTER TABLE `log_activity`
+  MODIFY `LogID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
