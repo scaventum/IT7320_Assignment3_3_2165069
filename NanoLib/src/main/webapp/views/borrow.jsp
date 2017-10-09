@@ -1,7 +1,6 @@
 <script>
 $(document).ready(function() {
-	$("input[name='ISBN']").change(function(e){
-		alert("a");
+	$("input[name='ISBN']").keydown(function(e){
 		var ISBN = $(this).val();
 		$.get('BorAction', {
 			Action : "getSerial",
@@ -9,6 +8,49 @@ $(document).ready(function() {
 		}, function(result) {
 			$("input[name='SerialPlaceholder']").val(result);
 			$("input[name='Serial']").val(result);
+			if(result>0){
+				$("input[name='BtnLend']").prop("disabled",false);
+			}else{
+				$("input[name='BtnLend']").prop("disabled",true);
+			}
+		});
+		
+		$.get('BorAction', {
+			Action : "getBookTitle",
+			ISBN : ISBN
+		}, function(result) {
+			$("input[name='BookTitlePlaceholder']").val(result);
+		});
+		
+		$.get('BorAction', {
+			Action : "getBookDescription",
+			ISBN : ISBN
+		}, function(result) {
+			$("textarea[name='BookDescriptionPlaceholder']").val(result);
+		});		
+	});
+	
+	$("input[name='MemID']").keydown(function(e){
+		var MemID = $(this).val();
+		$.get('BorAction', {
+			Action : "getMemFName",
+			MemID : MemID
+		}, function(result) {
+			$("input[name='MemFNamePlaceholder']").val(result);
+		});
+		
+		$.get('BorAction', {
+			Action : "getMemLName",
+			MemID : MemID
+		}, function(result) {
+			$("input[name='MemLNamePlaceholder']").val(result);
+		});
+		
+		$.get('BorAction', {
+			Action : "getMemNotice",
+			MemID : MemID
+		}, function(result) {
+			$("textarea[name='MemNoticePlaceholder']").val(result);
 		});
 	});
 });
@@ -28,8 +70,8 @@ $(document).ready(function() {
 		<div class="vmargin" style="height:10px;"></div>
 		<input type="text" name="MemID" placeholder="Member ID" required>
 		<div class="vmargin" style="height:10px;"></div>
-		<input type="text" name="MemFName" placeholder="Member First Name" disabled style="width:calc(50% - 15px)">
-		<input type="text" name="MemLName" placeholder="Member Last Name" disabled style="width:calc(50% - 15px)">
+		<input type="text" name="MemFNamePlaceholder" placeholder="Member First Name" disabled style="width:calc(50% - 15px)">
+		<input type="text" name="MemLNamePlaceholder" placeholder="Member Last Name" disabled style="width:calc(50% - 15px)">
 		<div class="vmargin" style="height:10px;"></div>
 		<textarea name="MemNoticePlaceholder" placeholder="Member Notice" disabled></textarea>
 		<div class="vmargin" style="height:10px;"></div>

@@ -32,6 +32,76 @@ public class BorAction extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		if(Action.equals("getBookTitle")) {
+			try {
+				newConnection = new DBFunction();
+				String ISBN = request.getParameter("ISBN");
+				String BookTitle = newConnection.getBookTitle(ISBN)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(BookTitle);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getBookDescription")) {
+			try {
+				newConnection = new DBFunction();
+				String ISBN = request.getParameter("ISBN");
+				String BookDescription = newConnection.getBookDescription(ISBN)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(BookDescription);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getMemFName")) {
+			try {
+				newConnection = new DBFunction();
+				String MemID = request.getParameter("MemID");
+				String BookDescription = newConnection.getMemFName(MemID)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(BookDescription);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getMemLName")) {
+			try {
+				newConnection = new DBFunction();
+				String MemID = request.getParameter("MemID");
+				String BookDescription = newConnection.getMemLName(MemID)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(BookDescription);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getMemNotice")) {
+			try {
+				newConnection = new DBFunction();
+				String MemID = request.getParameter("MemID");
+				String BookDescription = newConnection.getMemNotice(MemID)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(BookDescription);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
