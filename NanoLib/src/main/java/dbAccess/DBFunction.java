@@ -1,6 +1,8 @@
 package dbAccess;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBFunction implements DBFunctionInterface{
 	private Connection myConn;
@@ -238,5 +240,4 @@ public class DBFunction implements DBFunctionInterface{
 		}
 		return result;
 	}	
-
 }

@@ -15,7 +15,7 @@
 		if(request.getParameter("alert")!=null){
 			String alert=request.getParameter("alert");
 			if(alert.equals("inv_signin")){
-				%>alert("Invalid UserID or Password");<%
+				%>alert("Invalid User ID or Password");<%
 			}else{
 				%>alert("Alert");<%
 			}
