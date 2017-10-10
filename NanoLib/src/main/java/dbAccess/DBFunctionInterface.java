@@ -9,4 +9,5 @@ public interface DBFunctionInterface {
 	public String getMemLName(String MemID);
 	public String getMemNotice(String MemID);
 	public String getRetNotice(String ISBN,int Serial);
+	public String getMemID(String ISBN,int Serial);
 }

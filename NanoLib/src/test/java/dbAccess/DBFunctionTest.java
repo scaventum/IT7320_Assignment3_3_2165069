@@ -77,4 +77,10 @@ public class DBFunctionTest {
 		String expected="Book is not in borrowed list. ";
 		assertEquals(expected,obj.getRetNotice(ISBN,Serial));
 	}
+	
+	@Test
+	public void testGetMemID() {
+		String expected="";
+		assertEquals(expected,obj.getMemID(ISBN,Serial));
+	}
 }

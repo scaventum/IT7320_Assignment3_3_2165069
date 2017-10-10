@@ -217,6 +217,26 @@ public class DBFunction implements DBFunctionInterface{
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public String getMemID(String ISBN, int Serial) {
+		String result="";
+		try {
+			myPstmt = myConn.prepareStatement("Select MemID "
+					                        + "From tr_borrowing a "
+					                        + "Where a.ISBN = ? and a.Serial = ? "
+					                        + "And a.BorReturnDate Is Null");
+			myPstmt.setString(1, ISBN);
+			myPstmt.setInt(2, Serial);
+			myRs = myPstmt.executeQuery();
+
+			while(myRs.next()) {
+				result = myRs.getString(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}	
 
 }

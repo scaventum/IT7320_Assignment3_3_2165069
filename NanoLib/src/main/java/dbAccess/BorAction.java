@@ -65,9 +65,9 @@ public class BorAction extends HttpServlet {
 			try {
 				newConnection = new DBFunction();
 				String MemID = request.getParameter("MemID");
-				String BookDescription = newConnection.getMemFName(MemID)+"";
+				String MemFName = newConnection.getMemFName(MemID)+"";
 				response.setContentType("text/plain");
-				response.getWriter().write(BookDescription);
+				response.getWriter().write(MemFName);
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}catch(Exception e) {
@@ -79,9 +79,9 @@ public class BorAction extends HttpServlet {
 			try {
 				newConnection = new DBFunction();
 				String MemID = request.getParameter("MemID");
-				String BookDescription = newConnection.getMemLName(MemID)+"";
+				String MemLName = newConnection.getMemLName(MemID)+"";
 				response.setContentType("text/plain");
-				response.getWriter().write(BookDescription);
+				response.getWriter().write(MemLName);
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}catch(Exception e) {
@@ -93,9 +93,45 @@ public class BorAction extends HttpServlet {
 			try {
 				newConnection = new DBFunction();
 				String MemID = request.getParameter("MemID");
-				String BookDescription = newConnection.getMemNotice(MemID)+"";
+				String MemNotice = newConnection.getMemNotice(MemID)+"";
 				response.setContentType("text/plain");
-				response.getWriter().write(BookDescription);
+				response.getWriter().write(MemNotice);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getMemID")) {
+			try {
+				newConnection = new DBFunction();
+				String ISBN = request.getParameter("ISBN");
+				int Serial = 0;
+				if(request.getParameter("Serial")!="") {
+					Serial = Integer.parseInt(request.getParameter("Serial"));
+				}
+				String MemID = newConnection.getMemID(ISBN,Serial)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(MemID);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(Action.equals("getRetNotice")) {
+			try {
+				newConnection = new DBFunction();
+				String ISBN = request.getParameter("ISBN");
+				int Serial = 0;
+				if(request.getParameter("Serial")!="") {
+					Serial = Integer.parseInt(request.getParameter("Serial"));
+				}
+				String RetNotice = newConnection.getRetNotice(ISBN,Serial)+"";
+				response.setContentType("text/plain");
+				response.getWriter().write(RetNotice);
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}catch(Exception e) {
