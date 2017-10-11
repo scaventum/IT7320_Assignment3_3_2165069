@@ -22,6 +22,7 @@ function fillData(ISBN,Serial){
 		Serial : Serial
 	}, function(result) {
 		$("input[name='MemIDPlaceholder']").val(result);
+		$("input[name='MemID']").val(result);
 		$.get('BorAction', {
 			Action : "getMemFName",
 			MemID : result
@@ -72,7 +73,7 @@ $(document).ready(function() {
 <div class="content">
 	<div class="contentTitle">Return</div>
 	<div class="vmargin" style="height:10px;"></div>
-	<form method="post" action="borrowAction" class="formSingle">
+	<form method="post" action="BorAction" class="formSingle">
 		<input type="text" name="ISBN" placeholder="ISBN" required style="width:calc(100% - 64px)">
 		<input type="text" name="Serial" placeholder="#" required style="width:34px">
 		<div class="vmargin" style="height:10px;"></div>
@@ -81,6 +82,7 @@ $(document).ready(function() {
 		<textarea name="BookDescriptionPlaceholder" placeholder="Book Description" disabled></textarea>
 		<div class="vmargin" style="height:10px;"></div>
 		<input type="text" name="MemIDPlaceholder" placeholder="Member ID" disabled>
+		<input type="hidden" name="MemID">
 		<div class="vmargin" style="height:10px;"></div>
 		<input type="text" name="MemFNamePlaceholder" placeholder="Member First Name" disabled style="width:calc(50% - 15px)">
 		<input type="text" name="MemLNamePlaceholder" placeholder="Member Last Name" disabled style="width:calc(50% - 15px)">

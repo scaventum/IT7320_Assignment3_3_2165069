@@ -1,14 +1,13 @@
 package dbAccess;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBFunction implements DBFunctionInterface{
 	private Connection myConn;
 	private ResultSet myRs;
 	private PreparedStatement myPstmt;
 	private Statement myStmt;
+	private int myEu;
 	
 	public DBFunction() throws Exception{
 		String dbUrl = "jdbc:mysql://localhost:3306/db_nanolib";
@@ -21,6 +20,7 @@ public class DBFunction implements DBFunctionInterface{
 		
 		myRs = null;
 		myPstmt = null;
+		myEu=0;
 		
 	}
 
@@ -239,5 +239,51 @@ public class DBFunction implements DBFunctionInterface{
 			e.printStackTrace();
 		}
 		return result;
+	}	
+	
+	public void insertBorrow(String MemID, String ISBN, int Serial, int Duration) throws SQLException {
+		try {
+			myConn.setAutoCommit(false);
+			
+			myPstmt = myConn.prepareStatement("Insert Into tr_borrowing (MemID,ISBN,Serial,Duration,BorDate) Values (?,?,?,?,NOW()) ");
+			myPstmt.setString(1, MemID);
+			myPstmt.setString(2, ISBN);
+			myPstmt.setInt(3, Serial);
+			myPstmt.setInt(4, Duration);
+			myEu = myPstmt.executeUpdate();
+			
+			myPstmt = myConn.prepareStatement("Insert Into log_activity (TransID,LogModule,LogAction,LogTime) Values (?,?,?,NOW()) ");
+			myPstmt.setString(1, MemID+"/"+ISBN+"/"+Serial);
+			myPstmt.setString(2, "Borrow");
+			myPstmt.setString(3, "Insert");
+			myEu = myPstmt.executeUpdate();
+			
+			myConn.commit();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			myConn.rollback();
+		}
+	}	
+	
+	public void insertReturn(String MemID, String ISBN, int Serial) throws SQLException {
+		try {
+			myConn.setAutoCommit(false);
+			
+			myPstmt = myConn.prepareStatement("Update tr_borrowing Set BorReturnDate=NOW() Where ISBN=? And Serial=? And BorReturnDate Is Null");
+			myPstmt.setString(1, ISBN);
+			myPstmt.setInt(2, Serial);
+			myEu = myPstmt.executeUpdate();
+			
+			myPstmt = myConn.prepareStatement("Insert Into log_activity (TransID,LogModule,LogAction,LogTime) Values (?,?,?,NOW()) ");
+			myPstmt.setString(1, MemID+"/"+ISBN+"/"+Serial);
+			myPstmt.setString(2, "Return");
+			myPstmt.setString(3, "Insert");
+			myEu = myPstmt.executeUpdate();
+			
+			myConn.commit();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			myConn.rollback();
+		}
 	}	
 }

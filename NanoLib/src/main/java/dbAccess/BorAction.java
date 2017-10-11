@@ -1,7 +1,6 @@
 package dbAccess;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -145,7 +144,41 @@ public class BorAction extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		String BtnLend = request.getParameter("BtnLend");
+		String BtnReturn = request.getParameter("BtnReturn");
+		
+		if(BtnLend!=null) {
+			try {
+				newConnection = new DBFunction();
+				String MemID = request.getParameter("MemID");
+				String ISBN = request.getParameter("ISBN");
+				int Serial = Integer.parseInt(request.getParameter("Serial"));
+				int Duration = Integer.parseInt(request.getParameter("Duration"));
+				
+				newConnection.insertBorrow(MemID,ISBN,Serial,Duration);
+				response.sendRedirect("check.jsp");
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(BtnReturn!=null) {
+			try {
+				newConnection = new DBFunction();
+				String MemID = request.getParameter("MemID");
+				String ISBN = request.getParameter("ISBN");
+				int Serial = Integer.parseInt(request.getParameter("Serial"));
+				
+				newConnection.insertReturn(MemID,ISBN,Serial);
+				response.sendRedirect("check.jsp");
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
