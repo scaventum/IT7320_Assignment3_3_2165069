@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2017 at 10:50 AM
+-- Generation Time: Oct 12, 2017 at 12:19 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `log_activity` (
   `LogID` bigint(20) NOT NULL,
-  `TransID` varchar(50) NOT NULL,
+  `TransID` varchar(200) NOT NULL,
   `LogModule` varchar(50) NOT NULL,
   `LogAction` varchar(50) NOT NULL,
   `LogTime` datetime NOT NULL
@@ -45,7 +45,9 @@ INSERT INTO `log_activity` (`LogID`, `TransID`, `LogModule`, `LogAction`, `LogTi
 (2, 'M00001', 'Member', 'Insert', '2017-10-08 00:00:00'),
 (3, 'M00002', 'Member', 'Insert', '2017-10-08 00:00:00'),
 (4, '0-472-06521-1', 'Book', 'Insert', '2017-10-08 00:00:00'),
-(5, '978-0-478-39455-9', 'Book', 'Insert', '2017-10-08 00:00:00');
+(5, '978-0-478-39455-9', 'Book', 'Insert', '2017-10-08 00:00:00'),
+(9, 'M00001/0-472-06521-1/1', 'Borrow', 'Insert', '2017-10-12 11:11:53'),
+(10, 'M00001/0-472-06521-1/1', 'Return', 'Insert', '2017-10-12 11:12:13');
 
 -- --------------------------------------------------------
 
@@ -149,7 +151,7 @@ INSERT INTO `ms_user` (`UserID`, `Password`, `UserFName`, `UserLName`, `UserGend
 --
 
 CREATE TABLE `tr_borrowing` (
-  `BorID` varchar(50) NOT NULL,
+  `BorNO` bigint(20) NOT NULL,
   `MemID` varchar(50) NOT NULL,
   `ISBN` varchar(50) NOT NULL,
   `Serial` int(11) NOT NULL,
@@ -157,6 +159,13 @@ CREATE TABLE `tr_borrowing` (
   `BorDate` date NOT NULL,
   `BorReturnDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tr_borrowing`
+--
+
+INSERT INTO `tr_borrowing` (`BorNO`, `MemID`, `ISBN`, `Serial`, `Duration`, `BorDate`, `BorReturnDate`) VALUES
+(4, 'M00001', '0-472-06521-1', 1, 7, '2017-10-12', '2017-10-12');
 
 --
 -- Indexes for dumped tables
@@ -196,7 +205,7 @@ ALTER TABLE `ms_user`
 -- Indexes for table `tr_borrowing`
 --
 ALTER TABLE `tr_borrowing`
-  ADD PRIMARY KEY (`BorID`);
+  ADD PRIMARY KEY (`BorNO`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -206,7 +215,13 @@ ALTER TABLE `tr_borrowing`
 -- AUTO_INCREMENT for table `log_activity`
 --
 ALTER TABLE `log_activity`
-  MODIFY `LogID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `LogID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tr_borrowing`
+--
+ALTER TABLE `tr_borrowing`
+  MODIFY `BorNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
