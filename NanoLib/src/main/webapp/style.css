@@ -116,3 +116,11 @@ a{
 .formSingle td{
 	border:1px inset #ccc;
 }
+
+@media screen and (max-width: 600px) {
+	#header{
+		width:580px;
+	}#menu{
+		width:600px;
+	}
+}
