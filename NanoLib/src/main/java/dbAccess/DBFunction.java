@@ -24,6 +24,7 @@ public class DBFunction implements DBFunctionInterface{
 		
 	}
 
+	//Check validity of sign in credential
 	public boolean validSignIn(String UserID, String Password) {
 		boolean result=false;
 		
@@ -43,6 +44,7 @@ public class DBFunction implements DBFunctionInterface{
 		
 	}
 
+	//Retrieve available serial from ISBN
 	public int getSerial(String ISBN) {
 		int result=0;
 		try {
@@ -67,6 +69,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve book title from ISBN
 	public String getBookTitle(String ISBN) {
 		String result="";
 		try {
@@ -85,6 +88,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve book description from ISBN
 	public String getBookDescription(String ISBN) {
 		String result="";
 		try {
@@ -103,6 +107,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve member first name from member ID
 	public String getMemFName(String MemID) {
 		String result="";
 		try {
@@ -121,6 +126,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}	
 	
+	//Retrieve member last name from member ID
 	public String getMemLName(String MemID) {
 		String result="";
 		try {
@@ -139,6 +145,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve member notice from member ID
 	public String getMemNotice(String MemID) {
 		String result="";
 		try {
@@ -180,6 +187,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve return notice from ISBN and serial
 	public String getRetNotice(String ISBN,int Serial) {
 		String result="";
 		try {
@@ -221,6 +229,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}
 
+	//Retrieve member ID from ISBN and serial
 	public String getMemID(String ISBN, int Serial) {
 		String result="";
 		try {
@@ -241,6 +250,7 @@ public class DBFunction implements DBFunctionInterface{
 		return result;
 	}	
 	
+	//Add borrowing data
 	public void insertBorrow(String MemID, String ISBN, int Serial, int Duration) throws SQLException {
 		try {
 			myConn.setAutoCommit(false);
@@ -265,6 +275,7 @@ public class DBFunction implements DBFunctionInterface{
 		}
 	}	
 	
+	//Edit borrowing data to returned
 	public void insertReturn(String MemID, String ISBN, int Serial) throws SQLException {
 		try {
 			myConn.setAutoCommit(false);
